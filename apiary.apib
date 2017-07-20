@@ -1,0 +1,88 @@
+FORMAT: 1A
+HOST: http://opc.apiblueprint.org/
+
+# Our People Conference API
+
+API to expose our people conference functionality.
+
+## Discussions [/ourpeopleconference/discussions]
+
+### [REST] Create a Discussion request [POST]
+
+My Development application will use this endpoint to notify OPC that an employee wants to be discussed from within a talk.
+
++ Request (application/json)
+    + Headers
+
+            Accept-Charset: utf-8
+            Authentication: Bearer {{token}}
+            X-FORWARDED-HOST: {{host}}
+            X-AUTH-TENANT: {{customer}}
+    + Body
+    + Attributes (Discussion)
+
++ Response 201 (application/hal+json)
+    + Body
+    + Attributes (Discussion Created)
+
+### [EVENT] A discussion request is assigned to a conference [PUT /haufe-umantis.opc.customer.v1.cqrs.discussion.update]
+
+When a discussion request is assigned to a conference, an event is raised notifying it.
+
++ Request (application/hal+json)
+
++ Response 200 (application/hal+json)
+    + Headers
+
+            X-TENANT-ID: {{customer}}
+    + Body
+    + Attributes (Discussion Added)
+
+### [EVENT] A discussion was completed [PATCH /haufe-umantis.opc.customer.v1.cqrs.discussion.update]
+
+When a discussion is completed, an event is raised notifying it.
+
++ Request (application/hal+json)
+
++ Response 200 (application/hal+json)
+    + Headers
+
+            X-TENANT-ID: {{customer}}
+    + Body
+    + Attributes (Discussion Completed)
+            
+# Data Structures
+
+## Discussion
++ reason: TIME_IN_POSITION (enum[string], required)
+    + TIME_IN_POSITION
+    + REINTEGRATION
+    + REQUEST_BY_EMPLOYEE
++ needed_by: EMPLOYEE (enum[string], required)
+    + EMPLOYEE
+    + HR
+    + MANAGER
++ question: I'd like to move within the company. (string, required)
+
+## Discussion Links
++ self
+    + href: `http://localhost:8080/ourpeopleconference/v1/discussions/1` (string, required)
+
+## Discussion Created (Discussion)
++ id: 1 (number, required)
++ status: NEW (enum[string], required)
++ _links (Discussion Links)
+
+## Discussion Added (Discussion)
++ id: 1 (number, required)
++ name: Conference Name (string, required)
++ status: ADDED (enum[string], required)
++ _links (Discussion Links)
+
+## Discussion Completed (Discussion)
++ id: 1 (number, required)
++ name: Conference Name (string, required)
++ initiated_by: John Doe (string, required)
++ status: COMPLETED (enum[string], required)
++ comments: The employee must train its leadership skill before moving up (string, optional)
++ _links (Discussion Links)
