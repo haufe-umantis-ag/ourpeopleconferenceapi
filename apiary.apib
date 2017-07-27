@@ -33,18 +33,13 @@ My Development application will use this endpoint to notify OPC that an employee
 + **Description**
     + **id**: Id of the discussion
     + **name**: Name of the conference
-    + **initiated_by**: Name of the person who initiated the discussion (applies only to status COMPLETED)
+    + **date**: Date when this discussion will take or took place
     + **status**: Status of the discusion
     + **comments**: Optional comment of the discussion (applies only to status COMPLETED)
     + **link**: Link to retrieve an updated representation of the resource
     
-+ Attributes (Discussion)
-    + id: 1 (number, required)
-    + name: Conference Name (string, required)
-    + initiated_by: John Doe (string, required)
-    + status: COMPLETED (enum[string], required)
-    + comments: The employee must train its leadership skill before moving up (string, optional)
-    + link: `http://localhost:8080/ourpeopleconference/v1/discussions/1` (string, required)
++ Attributes (Discussion Event)
+
 
 ### TOPIC: haufe-umantis.opc.v1.cqrs.discussion.update  [GET /haufe-umantis.opc.v1.cqrs.discussion.update]
 
