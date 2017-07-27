@@ -46,7 +46,7 @@ My Development application will use this endpoint to notify OPC that an employee
     + comments: The employee must train its leadership skill before moving up (string, optional)
     + link: `http://localhost:8080/ourpeopleconference/v1/discussions/1` (string, required)
 
-### TOPIC: haufe-umantis.opc.v1.cqrs.discussion.update  [PATCH /haufe-umantis.opc.v1.cqrs.discussion.update]
+### TOPIC: haufe-umantis.opc.v1.cqrs.discussion.update  [GET /haufe-umantis.opc.v1.cqrs.discussion.update]
 
 #### A discussion was updated
 - When a discussion request is assigned to a conference, an update event is raised notifying it. The status specified on this event must be ADDED.
@@ -73,6 +73,7 @@ My Development application will use this endpoint to notify OPC that an employee
 + customer: 1111 (string, required)
 
 ## Discussion
++ user: `a9b7ba70-783b-317e-9998-dc4dd82eb3c5` (string, required)
 + reason: TIME_IN_POSITION (enum[string], required)
     + TIME_IN_POSITION
     + REINTEGRATION
@@ -93,7 +94,7 @@ My Development application will use this endpoint to notify OPC that an employee
 + headers (Event Headers, required)
 + id: 1 (number, required)
 + name: Conference Name (string, required)
-+ initiated_by: John Doe (string, optional)
 + status: COMPLETED (enum[string], required)
++ date: `2017-06-20T12:20:29.147+0000` (string, required)
 + comments: The employee must train its leadership skill before moving up (string, optional)
 + link: `http://localhost:8080/ourpeopleconference/v1/discussions/1` (string, required)
